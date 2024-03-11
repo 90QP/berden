@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>벗앤-확인용</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <p class="txt1">늘 곁에서 한결같이</p>
+  <h2 class="tit"><b>나를 가장 잘 아는</b><br>
+    단 하나의 인증서</h2>
+
+    <a href="#" class="con_btn">더 알아보기</a>
+
+    <span class="count" data-count="245"></span>
+    <span class="count" data-count="88"></span>
+    <span class="count" data-count="2118"></span>
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // 모든 .count 클래스를 가진 요소들을 선택하여 NodeList로 가져옴
+    const countElements = document.querySelectorAll('.count');
+    
+    // 각 .count 요소에 대해 반복
+    countElements.forEach(countElement => {
+      // 해당 요소의 data-count 속성 값을 가져와 정수로 변환하여 목표 값으로 설정
+      const targetCount = parseInt(countElement.dataset.count);
+      const updateInterval = 50; // milliseconds (애니메이션 업데이트 간격)
+      
+      let currentCount = 0; // 애니메이션 중 현재 카운트 값
+      // 부드러운 애니메이션을 위해 카운트를 목표 값까지 등분하여 증가시킬 값 계산
+      const increment = Math.ceil(targetCount / (1000 / updateInterval));
+      
+      // 카운트를 업데이트하고 화면에 표시하는 함수
+      const updateCount = () => {
+        currentCount += increment; // 증가시킬 값을 더함
+        if (currentCount >= targetCount) {
+          currentCount = targetCount; // 목표 값에 도달하면 현재 카운트 값을 목표 값으로 설정
+          clearInterval(interval); // 애니메이션 종료를 위해 interval 삭제
+        }
+        // 쉼표를 포함하여 숫자를 표시하는 형식으로 현재 카운트 값을 설정
+        countElement.textContent = currentCount.toLocaleString();
+      };
+      
+      // updateInterval마다 updateCount 함수를 호출하여 애니메이션 업데이트
+      const interval = setInterval(updateCount, updateInterval);
+    });
+  });
+</script>
+</body>
+</html>
